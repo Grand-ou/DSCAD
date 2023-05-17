@@ -12,3 +12,6 @@ npm-debug.*
 
 # macOS
 .DS_Store
+
+*.pem
+
