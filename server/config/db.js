@@ -2,10 +2,10 @@ const mysql = require("mysql");
 
 // connect MySQL
 var connection = mysql.createConnection({
-    host: "ntu-basketball.cmwubheuoe2k.ap-northeast-1.rds.amazonaws.com",
-    user: "admin",
+    host: "dscad-cluster.cluster-cd3i2qz10lhh.us-east-1.rds.amazonaws.com",
+    user: "dscad",
     password: "11111111",
-    database: "ntu_basketball",
+    database: "dscad_schema",
     port:3306,
 });
 
