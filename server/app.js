@@ -4,11 +4,7 @@ const db = require('./config/db');
 const app = express();
 const port = 7777;
 db.connect();
-<<<<<<< HEAD
 db.query('SELECT * FROM team;', function(err, rows, fields) {
-=======
-db.query('SELECT * FROM dscad_schema.team;', function(err, rows, fields) {
->>>>>>> 78973363bd1faeea382d53c5ca85c185373a07fa
     if (err) throw err;
     console.log('連線成功');
 }); 
