@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: dscad-be-deployment
+ labels:
+   app: dscad-be
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dscad-be
+  template:
+    metadata:
+      labels:
+        app: dscad-be
+    spec:
+     containers:
+     - name: dscad-be
+       image: 700728950475.dkr.ecr.us-east-1.amazonaws.com/dscad_be:latest
+       ports:
+       - containerPort: 7777
