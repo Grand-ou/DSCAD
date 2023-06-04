@@ -9,7 +9,6 @@ const PPPScreen = ({ navigation }) => {
     const problem_length = 5;
 
     const [allTeams, setAllTeams] = useState(data.teams);
-
     const [team_id, setteam_id] = useState([]);
     const [game_id, setgame_id] = useState([]);
     const [player_id, setplayer_id] = useState([]);
@@ -75,6 +74,7 @@ const PPPScreen = ({ navigation }) => {
                 const guest = response.data['guest'];
                 // console.log(typeof host);
                 const game_list = host.map((e, index) => allTeams[team_id.indexOf(e)]+'vs\n'+allTeams[team_id.indexOf(guest[index])]);
+                console.log(game_list);
                 setAllGames(game_list);
 
                 // some mysterious issues here...
@@ -91,6 +91,7 @@ const PPPScreen = ({ navigation }) => {
                 const playerList = response.data['players'];
                 setplayer_id(response.data['id']);
                 setPlayers(playerList);
+                console.log('players');
                 console.log(players);
                 // some mysterious issues here...
             })
@@ -121,7 +122,7 @@ const PPPScreen = ({ navigation }) => {
         console.log(selectedOption);
         if (currentQuestionIndex == 0) {
             setTargetTeam(selectedOption);
-            getPlayersList(selectedOption);
+            getPlayersList(team_id[index]);
             getGamesList(team_id[index]);
 
         }

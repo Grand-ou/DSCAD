@@ -43,11 +43,11 @@ const CreateInfoScreen = ({ navigation }) => {
         // Get team data
         axios.get('http://localhost:7777/getTeams')
             .then((response) => {
+                console.log('create info  getTeams');
                 const teamList = response.data['data'];
                 setTeamsId(response.data['id']);
-                console.log(response.data['id']);
                 const teams_updated = teamList.map((e, index) => { return { label: e, value: response.data['id'][index] } });
-                console.log(teams_updated);
+                // console.log(teams_updated);
                 setTeams(teams_updated);
                 console.log(teams);
                 // some mysterious issues here...
@@ -62,10 +62,10 @@ const CreateInfoScreen = ({ navigation }) => {
         onChangeTeam('');
         onChangeSchool('');
         onChangeCoach('');
-        setHomeTeam('');
-        setAwayTeam('');
+        setHomeTeam(0);
+        setAwayTeam(0);
         onChangeDate('');
-        setBelongTeam('');
+        setBelongTeam(0);
         setPosition('');
         onChangeName('');
         onChangeNumber('');
@@ -109,7 +109,7 @@ const CreateInfoScreen = ({ navigation }) => {
                     .then((res) => {
                         console.log(res.data['message']);
                         if (res.data['message'] == 'Created game') {
-                            suffix = homeTeam + ' vs. ' + awayTeam;
+                            suffix = homeTeam.toString() + ' vs. ' + awayTeam.toString();
                             setMsgSuccess(() => '成功新增' + typeSelected + ' ' + suffix);
                         }
                     })
