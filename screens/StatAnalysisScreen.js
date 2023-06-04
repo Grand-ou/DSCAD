@@ -3,7 +3,7 @@ import { View, Text, StatusBar, Image, StyleSheet, TextInput, TouchableOpacity, 
 import { COLORS, SIZES } from "../constants";
 import { SearchBar } from 'react-native-elements';
 import { useTheme } from "@react-navigation/native";
-
+import RNPickerSelect from "react-native-picker-select";
 
 // 測試資料
 // import * as data from '../data/QuizData.json';
@@ -364,11 +364,30 @@ const QueryModifyScreen = ({ navigation }) => {
     const [search2, setSearch2] = useState("");
     var data1 = [[], [], [], []];
     var data2 = [[], [], [], []];
-
+    const [teams, setTeams] = useState([]);
+    const [teamsId, setTeamsId] = useState([]);
 
     // // filter(search) 的搜尋結果成功與否之訊息
     // const [searchState, setSearchState] = useState('###########');
 
+    const getTeamsList = (() => {
+        // Get team data
+        axios.get('http://localhost:7777/getTeams')
+            .then((response) => {
+                console.log('create info  getTeams');
+                const teamList = response.data['data'];
+                setTeamsId(response.data['id']);
+                const teams_updated = teamList.map((e, index) => { return { label: e, value: response.data['id'][index] } });
+                console.log(teams_updated);
+                setTeams(teams_updated);
+                console.log(teams);
+                // some mysterious issues here...
+            })
+            .catch((error) => { console.error(error) })
+    });
+    useEffect(() => {
+        getTeamsList();
+    }, []);
 
     const updateSearch1 = (search1) => {
         setSearch1(search1);
@@ -475,25 +494,19 @@ const QueryModifyScreen = ({ navigation }) => {
 
             <View style={{ flexDirection: "row", justifyContent: 'center' }}>
                 <View style={styles.cardsWrapper}>
-                    <SearchBar
-                        round
-                        searchIcon={{ size: 30 }}
-                        onChangeText={updateSearch1}
-                        // style={{ height: 50 }}
-                        placeholder="請輸入完整球隊名稱"
-                        value={search1}
-                        lightTheme={true}
-                        containerStyle={{ backgroundColor: 'gray', padding: 0, borderRadius: 15, }}
-                        inputContainerStyle={{ backgroundColor: '#f4f4f4' }}
-                        inputStyle={{ backgroundColor: 'white', textAlign: 'center' }}
-                        placeholderTextColor={'gray'}
+                <RNPickerSelect
+                        placeholder={{ label: "請輸入完整球隊名稱", value: "" }}
+                        placeholderTextColor="#AAAAAA"
+                        style={pickerSelectStyles}
+                        onValueChange={(Team) => setTeamsId(Team)}
+                        items={teams}
                     />
                 </View>
                 <View style={styles.export}>
                     <Button
                         title="搜尋"
                         color="#FF6666"
-                        onPress={() => { filter(search1); getTeamDataList(search1); }} // 
+                        onPress={() => { filter(search1); getTeamDataList(teamsId); }} // 
                     />
                 </View>
             </View>
@@ -575,17 +588,22 @@ const QueryModifyScreen = ({ navigation }) => {
             </View>
             <View style={{ flexDirection: "row", justifyContent: 'center' }}>
                 <View style={styles.cardsWrapper}>
-                    <SearchBar
-                        round
-                        searchIcon={{ size: 30 }}
-                        placeholder="請輸入完整球員名稱"
-                        value={search2}
-                        onChangeText={updateSearch2}
-                        lightTheme={true}
-                        containerStyle={{ backgroundColor: 'gray', padding: 0, borderRadius: 15, }}
-                        inputContainerStyle={{ backgroundColor: '#f4f4f4' }}
-                        inputStyle={{ backgroundColor: 'white', textAlign: 'center' }}
-                        placeholderTextColor={'gray'}
+                    <RNPickerSelect
+                        // round
+                        // searchIcon={{ size: 30 }}
+                        // placeholder="請輸入完整球員名稱"
+                        // value={search2}
+                        // onChangeText={updateSearch2}
+                        // lightTheme={true}
+                        // containerStyle={{ backgroundColor: 'gray', padding: 0, borderRadius: 15, }}
+                        // inputContainerStyle={{ backgroundColor: '#f4f4f4' }}
+                        // inputStyle={{ backgroundColor: 'white', textAlign: 'center' }}
+                        // placeholderTextColor={'gray'}
+                        placeholder={{ label: "請輸入完整球隊名稱", value: "" }}
+                        placeholderTextColor="#AAAAAA"
+                        style={pickerSelectStyles}
+                        onValueChange={(Team) => setTeamsId(Team)}
+                        items={teams}
                     />
                 </View>
                 <View style={styles.export}>
@@ -766,5 +784,25 @@ const styles = StyleSheet.create({
         width: '90%',
         alignSelf: 'center',
     },
+    input: {
+        // format
+        alignSelf: 'center',
+        // size
+        width: '100%',
+        height: 80,
+    },
 });
 // charlie brown's steakhouse95.txt
+const pickerSelectStyles = StyleSheet.create({
+    inputIOS: {
+    },
+    inputAndroid: {
+    },
+    inputWeb: {
+        paddingHorizontal: 10,
+        paddingVertical: 8,
+        borderWidth: 1.8,
+        borderRadius: 20,
+        fontSize: '100%',
+    },
+});

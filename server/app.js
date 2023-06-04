@@ -242,15 +242,16 @@ app.get('/getPlayersQuery', (request, response) => {
 // 匯出情蒐報表的 search
 
 app.post('/searchTeam', function (request, response) {
-    const { team_name } = request.body;
+    const { team_id } = request.body;
     db.query(
-        `SELECT P.game_id, Pr.team, Pr.name, P.type, P.finish, P.result, P.free_throw
-        FROM ntubb.play as P, ntubb.player as Pr, ntubb.team as T
-        WHERE P.player_id = Pr.player_id and Pr.team = T.name and T.name = '${team_name}'`,
+        `SELECT P.game_id, Pr.team_id, Pr.name, P.type, P.finish, P.result, P.free_throw
+        FROM play as P, player as Pr, team as T
+        WHERE P.player_id = Pr.player_id and Pr.team_id = T.team_id and T.team_id  =${team_id};`,
         function (err, rows, fields) {
-            if (rows.length === 0) {
-                console.log('查無球隊資料，請檢察拼字是否正確');
-            }
+            // if (rows.length === 0) {
+            //     console.log('查無球隊資料，請檢察拼字是否正確');
+            // }
+            console.log(team_id);
             if (err) {
                 error_msg = err.code + ": Server Error";
                 console.log(error_msg);
@@ -268,11 +269,11 @@ app.post('/searchTeam', function (request, response) {
 
 
 app.post('/searchPlayer', function (request, response) {
-    const { team_name, player_name } = request.body;
+    const { team_id, player_id } = request.body;
     db.query(
-        `SELECT P.game_id, Pr.team, Pr.name, P.type, P.finish, P.result, P.free_throw
-        FROM ntubb.play as P, ntubb.player as Pr, ntubb.team as T
-        WHERE P.player_id = Pr.player_id and Pr.team = T.name and T.name = '${team_name}' and Pr.name = '${player_name}'`,
+        `SELECT P.game_id, Pr.team_id, Pr.name, P.type, P.finish, P.result, P.free_throw
+        FROM play as P, player as Pr, team as T
+        WHERE P.player_id = Pr.player_id and Pr.team_id = T.team_id and T.team_id  =${team_id}; and Pr.player_id = ${player_id}`,
         function (err, rows, fields) {
             if (rows.length === 0) {
                 console.log('No data found.')
