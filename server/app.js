@@ -242,16 +242,16 @@ app.get('/getPlayersQuery', (request, response) => {
 // 匯出情蒐報表的 search
 
 app.post('/searchTeam', function (request, response) {
-    const { team_id } = request.body;
+    const { teamName} = request.body;
     db.query(
         `SELECT P.game_id, Pr.team_id, Pr.name, P.type, P.finish, P.result, P.free_throw
         FROM play as P, player as Pr, team as T
-        WHERE P.player_id = Pr.player_id and Pr.team_id = T.team_id and T.team_id  =${team_id};`,
+        WHERE P.player_id = Pr.player_id and Pr.team_id = T.team_id and T.team_id  =${teamName};`,
         function (err, rows, fields) {
             // if (rows.length === 0) {
             //     console.log('查無球隊資料，請檢察拼字是否正確');
             // }
-            console.log(team_id);
+            console.log(request.body);
             if (err) {
                 error_msg = err.code + ": Server Error";
                 console.log(error_msg);

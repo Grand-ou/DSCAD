@@ -355,7 +355,7 @@ function dataMaker(data, search) {
 
 
 
-const QueryModifyScreen = ({ navigation }) => {
+const StatAnalysisScreen = ({ navigation }) => {
     /* */
     // console.log('Hello');
     const [teamData, setTeamData] = useState([]);
@@ -397,12 +397,12 @@ const QueryModifyScreen = ({ navigation }) => {
         setSearch2(search2);
     };
 
-    const getTeamDataList = ((team_name) => {
+    const getTeamDataList = ((teamName) => {
         // Get team data
-        console.log(team_name)
+        console.log(teamName)
         var t = [];
         axios.post('http://localhost:7777/searchTeam', {
-            team_name: team_name,
+            team_name: teamName,
         })
             .then((response) => {
                 const teamDataList = response.data['data'];
@@ -589,16 +589,6 @@ const QueryModifyScreen = ({ navigation }) => {
             <View style={{ flexDirection: "row", justifyContent: 'center' }}>
                 <View style={styles.cardsWrapper}>
                     <RNPickerSelect
-                        // round
-                        // searchIcon={{ size: 30 }}
-                        // placeholder="請輸入完整球員名稱"
-                        // value={search2}
-                        // onChangeText={updateSearch2}
-                        // lightTheme={true}
-                        // containerStyle={{ backgroundColor: 'gray', padding: 0, borderRadius: 15, }}
-                        // inputContainerStyle={{ backgroundColor: '#f4f4f4' }}
-                        // inputStyle={{ backgroundColor: 'white', textAlign: 'center' }}
-                        // placeholderTextColor={'gray'}
                         placeholder={{ label: "請輸入完整球隊名稱", value: "" }}
                         placeholderTextColor="#AAAAAA"
                         style={pickerSelectStyles}
@@ -695,7 +685,7 @@ const QueryModifyScreen = ({ navigation }) => {
 
 
 
-export default QueryModifyScreen;
+export default  StatAnalysisScreen;
 
 
 
