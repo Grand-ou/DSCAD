@@ -358,35 +358,55 @@ function dataMaker(data, search) {
 const StatAnalysisScreen = ({ navigation }) => {
     /* */
     // console.log('Hello');
+    const APIServer = 'http://localhost:7777/';
+    // const APIServer = 'http://api-server-lb-214271143.us-east-1.elb.amazonaws.com/';
     const [teamData, setTeamData] = useState([]);
     const [playerData, setPlayerData] = useState([]);
     const [search1, setSearch1] = useState("");
     const [search2, setSearch2] = useState("");
+    const [teams, setTeams] = useState([]); 
+    const [teamsId, setTeamsId] = useState([]);
+    const [players, setPlayers] = useState([]);
+    const [playersId, setPlayersId] = useState([]);
     var data1 = [[], [], [], []];
     var data2 = [[], [], [], []];
-    const [teams, setTeams] = useState([]);
-    const [teamsId, setTeamsId] = useState([]);
-
+    
     // // filter(search) 的搜尋結果成功與否之訊息
     // const [searchState, setSearchState] = useState('###########');
 
     const getTeamsList = (() => {
         // Get team data
-        axios.get('http://localhost:7777/getTeams')
+        axios.get(APIServer + 'getTeams')
             .then((response) => {
-                console.log('create info  getTeams');
+                console.log('stat analyze  getTeams');
                 const teamList = response.data['data'];
+                // console.log(teamList);
                 setTeamsId(response.data['id']);
                 const teams_updated = teamList.map((e, index) => { return { label: e, value: response.data['id'][index] } });
                 console.log(teams_updated);
                 setTeams(teams_updated);
-                console.log(teams);
-                // some mysterious issues here...
+                // console.log(teams);
+            })
+            .catch((error) => { console.error(error) })
+    });
+    const getPlayersList = (() => {
+        // Get player data
+        axios.get(APIServer + 'getPlayersQuery')
+            .then((response) => {
+                console.log('stat analyze  getPlayers');
+                const playerList = response.data['data'];
+                console.log(playerList);
+                setPlayersId(response.data['player_id']);
+                const players_updt = playerList.map((e, index) => { return { label: e['name'], value: e['player_id']}});
+                // console.log(players_updt);
+                setPlayers(players_updt);
+                // console.log(players);
             })
             .catch((error) => { console.error(error) })
     });
     useEffect(() => {
         getTeamsList();
+        getPlayersList();
     }, []);
 
     const updateSearch1 = (search1) => {
@@ -399,34 +419,47 @@ const StatAnalysisScreen = ({ navigation }) => {
 
     const getTeamDataList = ((teamName) => {
         // Get team data
-        console.log(teamName)
-        var t = [];
-        axios.post('http://localhost:7777/searchTeam', {
-            team_name: teamName,
+        console.log('teamName:', teamName)
+        axios.post(APIServer + 'searchTeam', {
+            teamName,
         })
             .then((response) => {
                 const teamDataList = response.data['data'];
-                //console.log(typeof(teamDataList));
+                // console.log(typeof(teamDataList));
                 setTeamData(teamDataList);
-
+                console.log('teamData:', teamData);
             })
             .catch((error) => { console.error(error) })
-        //console.log(teamData);
+        // console.log('teamdata:', teamData);
     });
 
 
-    const getPlayerDataList = ((team_name, player_name) => {
+    // const getPlayerDataList = ((team_name, player_name) => {
+    //     // Get team data
+    //     console.log(team_name, player_name)
+    //     axios.post(APIServer + 'searchPlayer', {
+    //         team_name,
+    //         player_name,
+    //     })
+    //         .then((response) => {
+    //             const playerDataList = response.data['data'];
+    //             console.log(playerDataList);
+    //             setPlayerData(playerDataList);
+    //             console.log('playerData:', playerData);
+    //         })
+    //         .catch((error) => { console.error(error) })
+    // });
+    const getPlayerDataList = ((player_id) => {
         // Get team data
-        // console.log(player_name)
-        axios.post('http://localhost:7777/searchPlayer', {
-            team_name: team_name,
-            player_name: player_name,
+        console.log(player_id)
+        axios.post(APIServer + 'searchPlayer', {
+            player_id
         })
             .then((response) => {
                 const playerDataList = response.data['data'];
-                console.log(playerDataList);
-                // const teams_updated = teamList.map((e) => {return { label: e, value: e }});
+                console.log('playerDataList', playerDataList);
                 setPlayerData(playerDataList);
+                console.log('playerData:', playerData);
             })
             .catch((error) => { console.error(error) })
     });
@@ -587,7 +620,7 @@ const StatAnalysisScreen = ({ navigation }) => {
                 <Text style={styles.box}>▶    搜尋球員</Text>
             </View>
             <View style={{ flexDirection: "row", justifyContent: 'center' }}>
-                <View style={styles.cardsWrapper}>
+                {/* <View style={styles.cardsWrapper}>
                     <RNPickerSelect
                         placeholder={{ label: "請輸入完整球隊名稱", value: "" }}
                         placeholderTextColor="#AAAAAA"
@@ -595,12 +628,22 @@ const StatAnalysisScreen = ({ navigation }) => {
                         onValueChange={(Team) => setTeamsId(Team)}
                         items={teams}
                     />
+                </View> */}
+                <View style={styles.cardsWrapper}>
+                    <RNPickerSelect
+                        placeholder={{ label: "請選取球員", value: "" }}
+                        placeholderTextColor="#AAAAAA"
+                        style={pickerSelectStyles}
+                        onValueChange={(Player) => setPlayersId(Player)}
+                        items={players}
+                    />
                 </View>
                 <View style={styles.export}>
                     <Button
                         title="搜尋"
                         color="#FF6666"
-                        onPress={() => { filter(search2); getPlayerDataList(search1, search2) }}
+                        // onPress={() => { filter(search2); getPlayerDataList(search1, search2) }}
+                        onPress={() => { filter(search2); getPlayerDataList(playersId) }}
                     />
                 </View>
             </View>

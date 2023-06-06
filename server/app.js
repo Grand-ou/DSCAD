@@ -268,18 +268,44 @@ app.post('/searchTeam', function (request, response) {
 });
 
 
+// app.post('/searchPlayer', function (request, response) {
+//     const { team_id, player_id } = request.body;
+//     db.query(
+//         `SELECT P.game_id, Pr.team_id, Pr.name, P.type, P.finish, P.result, P.free_throw
+//         FROM play as P, player as Pr, team as T
+//         WHERE P.player_id = Pr.player_id and Pr.team_id = T.team_id and T.team_id  =${team_id}; and Pr.player_id = ${player_id}`,
+//         function (err, rows, fields) {
+//             if (rows.length === 0) {
+//                 console.log('No data found.')
+//                 // console.log(team_name)
+//                 // console.log(player_name)
+//             }
+//             if (err) {
+//                 error_msg = err.code + ": Server Error";
+//                 console.log(error_msg);
+//                 return response.send({ message: error_msg });
+//             };
+//             obj = JSON.parse(JSON.stringify(rows));
+//             values = [];
+//             for (let i = 0; i < obj.length; i++) {
+//                 values.push(obj[i]);
+//             }
+//             return response.send({ data: values });
+//         }
+//     );
+// });
+
 app.post('/searchPlayer', function (request, response) {
-    const { team_id, player_id } = request.body;
+    const { player_id } = request.body;
     db.query(
         `SELECT P.game_id, Pr.team_id, Pr.name, P.type, P.finish, P.result, P.free_throw
-        FROM play as P, player as Pr, team as T
-        WHERE P.player_id = Pr.player_id and Pr.team_id = T.team_id and T.team_id  =${team_id}; and Pr.player_id = ${player_id}`,
+        FROM play as P, player as Pr
+        WHERE P.player_id = Pr.player_id and Pr.player_id = ${player_id}`,
         function (err, rows, fields) {
-            if (rows.length === 0) {
-                console.log('No data found.')
-                // console.log(team_name)
-                // console.log(player_name)
-            }
+            console.log(request.body);
+            // if (rows.length === 0) {
+            //     console.log('No data found.')
+            // }
             if (err) {
                 error_msg = err.code + ": Server Error";
                 console.log(error_msg);
