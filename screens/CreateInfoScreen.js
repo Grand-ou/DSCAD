@@ -8,8 +8,9 @@ import RNPickerSelect from "react-native-picker-select";
 
 import * as notifications from '../model/Notifications.json';
 
-const CreateInfoScreen = ({ navigation }) => {
+const APIServer = 'http://api-server-lb-214271143.us-east-1.elb.amazonaws.com/';
 
+const CreateInfoScreen = ({ navigation }) => {
     const Notifications = notifications.Notifications;
     const [listData, setListData] = useState(
         Notifications.map((NotificationItem, index) => ({
@@ -41,7 +42,7 @@ const CreateInfoScreen = ({ navigation }) => {
 
     const getTeamsList = (() => {
         // Get team data
-        axios.get('http://localhost:7777/getTeams')
+        axios.get(APIServer + 'getTeams')
             .then((response) => {
                 console.log('create info  getTeams');
                 const teamList = response.data['data'];
@@ -78,7 +79,7 @@ const CreateInfoScreen = ({ navigation }) => {
         if (typeSelected === '球隊') {
             if (team && school && coach) {
                 axios
-                    .post("http://localhost:7777/createTeam", {
+                    .post(APIServer + "createTeam", {
                         name: team,
                         school: school,
                         coach: coach
@@ -88,6 +89,9 @@ const CreateInfoScreen = ({ navigation }) => {
                         if (res.data['message'] == 'Created team: ' + team) {
                             suffix = team;
                             setMsgSuccess(() => '成功新增' + typeSelected + ' ' + suffix);
+                        } else {
+                            // print the response message
+                            alert(res.data['message']);
                         }
                     })
                     .catch((e) => {
@@ -101,7 +105,7 @@ const CreateInfoScreen = ({ navigation }) => {
         } else if (typeSelected === '球賽') {
             if (homeTeam && awayTeam && date) {
                 axios
-                    .post("http://localhost:7777/createGame", {
+                    .post(APIServer + "createGame", {
                         host: homeTeam,
                         guest: awayTeam,
                         date: date
@@ -124,7 +128,7 @@ const CreateInfoScreen = ({ navigation }) => {
         } else if (typeSelected === '球員') {
             if (belongTeam && position && name && number) {
                 axios
-                    .post("http://localhost:7777/createPlayer", {
+                    .post(APIServer + "createPlayer", {
                         team: belongTeam,
                         name: name,
                         position: position,

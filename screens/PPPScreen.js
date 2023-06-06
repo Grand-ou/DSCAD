@@ -7,6 +7,7 @@ import axios from 'axios';
 import { textAlign } from "@mui/system";
 const PPPScreen = ({ navigation }) => {
     const problem_length = 5;
+    const APIServer = 'http://api-server-lb-214271143.us-east-1.elb.amazonaws.com/';
 
     const [allTeams, setAllTeams] = useState(data.teams);
     const [team_id, setteam_id] = useState([]);
@@ -46,7 +47,7 @@ const PPPScreen = ({ navigation }) => {
     const getTeamsList = (() => {
         if (start === true) {
             setStart(false)
-            axios.get('http://localhost:7777/getTeams')
+            axios.get(APIServer + 'getTeams')
                 .then((response) => {
                     const teamList = response.data['data'];
                     setteam_id(response.data['id']);
@@ -63,7 +64,7 @@ const PPPScreen = ({ navigation }) => {
     const getGamesList = ((team) => {
         axios
             .post
-            ('http://localhost:7777/getGamesByTeam', {
+            (APIServer + 'getGamesByTeam', {
                 teamName: team,
             })
             .then((response) => {
@@ -84,7 +85,7 @@ const PPPScreen = ({ navigation }) => {
     const getPlayersList = ((team) => {
         axios
             .post
-            ('http://localhost:7777/getPlayersByTeam', {
+            (APIServer + 'getPlayersByTeam', {
                 teamName: team,
             })
             .then((response) => {
@@ -100,7 +101,7 @@ const PPPScreen = ({ navigation }) => {
     const createPlay = ((target) => {
         axios
             .post
-            ('http://localhost:7777/createPlay', {
+            (APIServer + 'createPlay', {
 
                 player_id: targetPlayerId ,
                 game_id: targetGameId ,

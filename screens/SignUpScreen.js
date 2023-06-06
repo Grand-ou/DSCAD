@@ -18,6 +18,9 @@ import Feather from 'react-native-vector-icons/Feather';
 import { useTheme } from 'react-native-paper';
 
 import axios from 'axios';
+import SignInScreen from './SignInScreen';
+// const LogInServer = "http://localhost:7777/";
+const LogInServer = "http://login-server-lb-1393631366.us-east-1.elb.amazonaws.com/";
 
 const SignUpScreen = ({ navigation }) => {
     const { colors } = useTheme();
@@ -124,7 +127,7 @@ const SignUpScreen = ({ navigation }) => {
     const signupHandle = (username, password, confirm_password) => {
         if (username.length >= 4 && password.length >= 8 && confirm_password.length >= 8) {
             axios
-                .post("http://localhost:7777/signup", {
+                .post(LogInServer + "signup", {
                     username,
                     password,
                     confirm_password

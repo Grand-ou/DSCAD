@@ -24,6 +24,9 @@ import { AuthContext } from '../components/context';
 
 import * as users from '../model/users.json';
 
+// const LogInServer = "http://localhost:7777/";
+const LogInServer = "http://login-server-lb-1393631366.us-east-1.elb.amazonaws.com/";
+
 const SignInScreen = ({ navigation }) => {
     /* 串接資料庫 */
     // const express = require('express');
@@ -110,7 +113,7 @@ const SignInScreen = ({ navigation }) => {
     const login = (username, password) => {
         if (username.length >= 4 && password.length >= 8) {
             axios
-                .post("http://localhost:7777/signin", {
+                .post(LogInServer + "signin", {
                     username: username,
                     password: password,
                 })
