@@ -1,11 +1,11 @@
 {
   "files": {
-    "app.js": "/static/js/app.7da671fe.chunk.js",
-    "app.js.map": "/static/js/app.7da671fe.chunk.js.map",
+    "app.js": "/static/js/app.9219d17c.chunk.js",
+    "app.js.map": "/static/js/app.9219d17c.chunk.js.map",
     "runtime~app.js": "/static/js/runtime~app.2e9f1821.js",
     "runtime~app.js.map": "/static/js/runtime~app.2e9f1821.js.map",
-    "static/js/2.d0d80d2c.chunk.js": "/static/js/2.d0d80d2c.chunk.js",
-    "static/js/2.d0d80d2c.chunk.js.map": "/static/js/2.d0d80d2c.chunk.js.map",
+    "static/js/2.6c2dc346.chunk.js": "/static/js/2.6c2dc346.chunk.js",
+    "static/js/2.6c2dc346.chunk.js.map": "/static/js/2.6c2dc346.chunk.js.map",
     "fonts/AntDesign.ttf": "/./fonts/AntDesign.ttf",
     "fonts/Entypo.ttf": "/./fonts/Entypo.ttf",
     "fonts/Feather.ttf": "/./fonts/Feather.ttf",
@@ -24,7 +24,7 @@
     "index.html": "/index.html",
     "manifest.json": "/manifest.json",
     "serve.json": "/serve.json",
-    "static/js/2.d0d80d2c.chunk.js.LICENSE.txt": "/static/js/2.d0d80d2c.chunk.js.LICENSE.txt",
+    "static/js/2.6c2dc346.chunk.js.LICENSE.txt": "/static/js/2.6c2dc346.chunk.js.LICENSE.txt",
     "static/media/DottedBG.png": "/static/media/DottedBG.e140e433.png",
     "static/media/add.png": "/static/media/add.8fe1565e.png",
     "static/media/basketball-player-white.png": "/static/media/basketball-player-white.dc33e007.png",
@@ -46,7 +46,7 @@
   },
   "entrypoints": [
     "static/js/runtime~app.2e9f1821.js",
-    "static/js/2.d0d80d2c.chunk.js",
-    "static/js/app.7da671fe.chunk.js"
+    "static/js/2.6c2dc346.chunk.js",
+    "static/js/app.9219d17c.chunk.js"
   ]
 }
