@@ -358,8 +358,8 @@ function dataMaker(data, search) {
 const StatAnalysisScreen = ({ navigation }) => {
     /* */
     // console.log('Hello');
-    const APIServer = 'http://localhost:7777/';
-    // const APIServer = 'http://api-server-lb-214271143.us-east-1.elb.amazonaws.com/';
+    // const APIServer = 'http://localhost:7777/';
+    const APIServer = 'http://api-server-lb-214271143.us-east-1.elb.amazonaws.com/';
     const [teamData, setTeamData] = useState([]);
     const [playerData, setPlayerData] = useState([]);
     const [search1, setSearch1] = useState("");
