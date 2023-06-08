@@ -1,0 +1,19 @@
+# Backend Server
+## Endpoint
+URL: ``
+## API
+- `/test`：測試用
+- `/signup`：註冊
+- `/signin`：登入
+- `/createTeam`
+- `/createGame`
+- `/createPlayer`
+- `/createPlay`
+- `/getTeams`
+- `/getPlayersByTeam`
+- `/getGamesByTeam`
+- `/getGamesQuery`
+- `/getTeamsQuery`
+- `/getPlayersQuery`
+- `/searchTeam`
+- `/searchPlayer`
