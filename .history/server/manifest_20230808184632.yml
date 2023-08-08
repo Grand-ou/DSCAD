@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hoopstat-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hoopstat-backend
+  template:
+    metadata:
+      labels:
+        app: hoopstat-backend
+    spec:
+      containers:
+        - name: hoopstat-backend-container
+          image: public.ecr.aws/j7r2v4e2/hoopstat-server:latest
+          ports:
+            - containerPort: 3000
