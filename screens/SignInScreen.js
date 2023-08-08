@@ -17,15 +17,14 @@ import { COLORS, SIZES } from "../constants";
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 import axios from 'axios';
-
+import * as data from '../data/Data.json';
 import { useTheme } from 'react-native-paper';
 
 import { AuthContext } from '../components/context';
 
-import * as users from '../model/users.json';
 
 // const LogInServer = "http://localhost:7777/";
-const LogInServer = "http://login-server-lb-1393631366.us-east-1.elb.amazonaws.com/";
+const LogInServer = data.backend_url;
 
 const SignInScreen = ({ navigation }) => {
     /* 串接資料庫 */

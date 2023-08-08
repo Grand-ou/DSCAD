@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, StatusBar, Image, StyleSheet, TextInput, TouchableOpacity, Modal, Picker, Switch, Button, Animated, ScrollView, TouchableHighlight, Dimensions, SafeAreaView } from 'react-native'
-import { COLORS, SIZES } from "../constants";
 import { SearchBar } from 'react-native-elements';
 import { useTheme } from "@react-navigation/native";
 import { useFocusEffect } from '@react-navigation/native';
@@ -12,14 +11,13 @@ import Fontisto from 'react-native-vector-icons/Fontisto';
 
 // 滑動刪除
 import { SwipeListView } from 'react-native-swipe-list-view';
-import * as notifications from '../model/Notifications.json';
 
 // 選擇框框
 import RNPickerSelect from 'react-native-picker-select';
 
 // 測試資料
-import * as data from '../data/QuizData.json';
-import { color, set } from "react-native-reanimated";
+import * as data from '../data/Data.json';
+import { color, set } from "react-native-reanimated"; 
 
 // 讀取資料庫
 import axios from 'axios';

@@ -16,11 +16,11 @@ import { LinearGradient } from 'expo-linear-gradient';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 import { useTheme } from 'react-native-paper';
-
+import * as data from '../data/Data.json';
 import axios from 'axios';
 import SignInScreen from './SignInScreen';
 // const LogInServer = "http://localhost:7777/";
-const LogInServer = "http://login-server-lb-1393631366.us-east-1.elb.amazonaws.com/";
+const LogInServer = data.backend_url;
 
 const SignUpScreen = ({ navigation }) => {
     const { colors } = useTheme();
@@ -37,22 +37,6 @@ const SignUpScreen = ({ navigation }) => {
         isValidPassword: true,
         isValidConfirmPassword: true,
     });
-
-    // const textInputChange = (val) => {
-    //     if (val.length !== 0) {
-    //         setData({
-    //             ...data,
-    //             username: val,
-    //             check_textInputChange: true
-    //         });
-    //     } else {
-    //         setData({
-    //             ...data,
-    //             username: val,
-    //             check_textInputChange: false
-    //         });
-    //     }
-    // }
 
     const textInputChange = (val) => {
         if (val.trim().length >= 4) {

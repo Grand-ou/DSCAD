@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import { View, Text, SafeAreaView, StatusBar, Image, TouchableOpacity, Modal, Animated, ScrollView, StyleSheet } from 'react-native'
 import { COLORS, SIZES } from "../constants";
-import * as data from '../data/QuizData.json';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import * as data from '../data/Data.json';
 import axios from 'axios';
-import { textAlign } from "@mui/system";
+
 const PPPScreen = ({ navigation }) => {
     const problem_length = 5;
-    const APIServer = 'http://api-server-lb-214271143.us-east-1.elb.amazonaws.com/';
-
+    const APIServer = "https://public.ecr.aws/j7r2v4e2/hoopstat-server:latest/";
+    console.log(APIServer);
     const [allTeams, setAllTeams] = useState(data.teams);
     const [team_id, setteam_id] = useState([]);
     const [game_id, setgame_id] = useState([]);
