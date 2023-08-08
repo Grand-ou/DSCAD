@@ -7,10 +7,6 @@ db.connect();
 db.query('SELECT * FROM team;', function(err, rows, fields) {
     if (err) throw err;
     console.log('連線成功');
-    teams = getList(rows, 'name');
-    id = getList(rows, 'team_id');
-    console.log(teams);
-    console.log(id);
 }); 
 const cors = require('cors');
 app.use(cors());

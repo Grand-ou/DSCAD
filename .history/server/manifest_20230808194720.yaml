@@ -18,12 +18,12 @@ spec:
         app: hoopstat-backend
     spec:
       containers:
-      - image: public.ecr.aws/j7r2v4e2/hoopstat-server:latest
+      - image: public.ecr.aws/b5c5s7l4/adityaprakash2811/nodek8:latest
         name: hoopstat-backend
         imagePullPolicy: Always
         resources: {}
         ports:
-          - containerPort: 7777
+          - containerPort: 3080 
 status: {}
 
 ---

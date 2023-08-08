@@ -3,27 +3,27 @@ kind: Deployment
 metadata:
   creationTimestamp: null
   labels:
-    app: hoopstat-backend
-  name: hoopstat-backend
+    app: webapp
+  name: webapp
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: hoopstat-backend
+      app: webapp
   strategy: {}
   template:
     metadata:
       creationTimestamp: null
       labels:
-        app: hoopstat-backend
+        app: webapp
     spec:
       containers:
-      - image: public.ecr.aws/j7r2v4e2/hoopstat-server:latest
-        name: hoopstat-backend
+      - image: public.ecr.aws/b5c5s7l4/adityaprakash2811/nodek8:latest
+        name: webapp
         imagePullPolicy: Always
         resources: {}
         ports:
-          - containerPort: 7777
+          - containerPort: 3080 
 status: {}
 
 ---
@@ -31,13 +31,13 @@ status: {}
 apiVersion: v1
 kind: Service
 metadata:
-  name: hoopstat-backend
+  name: webapp
   labels:
-    run: hoopstat-backend
+    run: webapp
 spec:
   ports:
   - port: 80
     protocol: TCP
   selector:
-    app: hoopstat-backend
+    app: webapp
   type: NodePort
