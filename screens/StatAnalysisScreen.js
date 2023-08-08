@@ -1,14 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, StatusBar, Image, StyleSheet, TextInput, TouchableOpacity, Modal, Picker, Switch, Button, Animated, ScrollView, TouchableHighlight, Dimensions, SafeAreaView } from 'react-native'
-import { COLORS, SIZES } from "../constants";
-import { SearchBar } from 'react-native-elements';
-import { useTheme } from "@react-navigation/native";
+
 import RNPickerSelect from "react-native-picker-select";
-
-// 測試資料
-// import * as data from '../data/QuizData.json';
-import { color, set } from "react-native-reanimated";
-
+import * as data from '../data/Data.json';
 import { CSVLink } from "react-csv";
 import axios from 'axios';
 
@@ -359,7 +353,7 @@ const StatAnalysisScreen = ({ navigation }) => {
     /* */
     // console.log('Hello');
     // const APIServer = 'http://localhost:7777/';
-    const APIServer = 'http://api-server-lb-214271143.us-east-1.elb.amazonaws.com/';
+    const APIServer = data.backend_url;
     const [teamData, setTeamData] = useState([]);
     const [playerData, setPlayerData] = useState([]);
     const [search1, setSearch1] = useState("");

@@ -5,20 +5,11 @@ import {
     StyleSheet, Animated, TouchableHighlight, StatusBar
 } from 'react-native';
 import RNPickerSelect from "react-native-picker-select";
+import * as data from '../data/Data.json';
 
-import * as notifications from '../model/Notifications.json';
-
-const APIServer = 'http://api-server-lb-214271143.us-east-1.elb.amazonaws.com/';
+const APIServer = data.backend_url;
 
 const CreateInfoScreen = ({ navigation }) => {
-    const Notifications = notifications.Notifications;
-    const [listData, setListData] = useState(
-        Notifications.map((NotificationItem, index) => ({
-            key: `${index}`,
-            title: NotificationItem.title,
-            details: NotificationItem.details,
-        })),
-    );
 
     const [typeSelected, setTypeSelected] = useState('');
 

@@ -14,9 +14,6 @@ import {
     DarkTheme as PaperDarkTheme
 } from 'react-native-paper';
 
-import { DrawerContent } from '../screens/DrawerContent';
-
-import { AuthContext } from '../components/context';
 
 import RootStackScreen from '../screens/RootStackScreen';
 
@@ -28,9 +25,6 @@ const Drawer = createDrawerNavigator();
 
 
 const HomeScreen = ({ navigation }) => {
-    const [isLoading, setIsLoading] = React.useState(true);
-    const [userToken, setUserToken] = React.useState(null);
-
     const [isDarkTheme, setIsDarkTheme] = React.useState(false);
 
     const initialLoginState = {
