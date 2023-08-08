@@ -1,5 +1,5 @@
 {
-    "backend_url": "http://localhost:7777/",
+    "backend_url": "http://107.21.80.8:7777/",
     "games": [
         {
             "options": {
