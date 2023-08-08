@@ -6,7 +6,8 @@ import axios from 'axios';
 
 const PPPScreen = ({ navigation }) => {
     const problem_length = 5;
-    const APIServer = "https://public.ecr.aws/j7r2v4e2/hoopstat-server:latest/";
+    // const APIServer = "http://localhost:7777/";
+    const APIServer = data.backend_url;
     console.log(APIServer);
     const [allTeams, setAllTeams] = useState(data.teams);
     const [team_id, setteam_id] = useState([]);
