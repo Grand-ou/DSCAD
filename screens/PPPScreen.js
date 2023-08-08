@@ -6,7 +6,7 @@ import axios from 'axios';
 
 const PPPScreen = ({ navigation }) => {
     const problem_length = 5;
-    const APIServer = "http://localhost:7777/";
+    const APIServer = "http://107.21.80.8:7777/";
     // const APIServer = data.backend_url;
     console.log(APIServer);
     const [allTeams, setAllTeams] = useState(data.teams);
