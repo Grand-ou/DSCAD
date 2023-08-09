@@ -146,8 +146,8 @@ app.get('/getTeams', (request, response) => {
         function (err, rows, fields) {
             teams = getList(rows, 'name');
             id = getList(rows, 'team_id');
-            console.log(teams);
-            console.log(id);
+            // console.log(teams);
+            // console.log(id);
             if (rows.length === 0) {
                 console.log('No teams found.')
             }

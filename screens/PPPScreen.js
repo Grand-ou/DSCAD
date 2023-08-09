@@ -75,7 +75,7 @@ const PPPScreen = ({ navigation }) => {
                 const guest = response.data['guest'];
                 // console.log(typeof host);
                 const game_list = host.map((e, index) => allTeams[team_id.indexOf(e)]+'vs\n'+allTeams[team_id.indexOf(guest[index])]);
-                console.log(game_list);
+                // console.log(game_list);
                 setAllGames(game_list);
 
                 // some mysterious issues here...
@@ -92,8 +92,8 @@ const PPPScreen = ({ navigation }) => {
                 const playerList = response.data['players'];
                 setplayer_id(response.data['id']);
                 setPlayers(playerList);
-                console.log('players');
-                console.log(players);
+                // console.log('players');
+                // console.log(players);
                 // some mysterious issues here...
             })
             .catch((error) => { console.error(error) })
@@ -125,6 +125,7 @@ const PPPScreen = ({ navigation }) => {
             setTargetTeam(selectedOption);
             getPlayersList(team_id[index]);
             getGamesList(team_id[index]);
+            
 
         }
         if (currentQuestionIndex == 1) {
@@ -151,6 +152,20 @@ const PPPScreen = ({ navigation }) => {
         // setTargetTeam(selectedOption); // 儲存選到的球隊
         setCurrentOptionSelected(selectedOption);
         // Show Next Button
+        setTimeout(() => {
+            if (currentQuestionIndex == 6 || foulPossible == 0) {
+                // 已經跑完所有的題目了
+                // Show Score Modal
+                setShowScoreModal(true);
+            } else {
+                getTeamsList(false);
+                // console.log('hi');
+                setCurrentQuestionIndex(currentQuestionIndex + 1); // 往後一題，題號 + 1 // 設定前三頁為基本資訊
+                setCurrentOptionSelected(null);                    // 把點選的選項都清掉
+                setShowNextButton(false);                          // 把 Next Button 關起來
+            }
+        }, 800);
+        // handleNext();
         setShowNextButton(true);
 
     }
@@ -267,7 +282,6 @@ const PPPScreen = ({ navigation }) => {
         }
     }
 
-    // 只要答案公布了(執行完 validateAnswer)，就會執行這個
     // 選項點下去的部分寫在 renderNextButton()
     // 所以 handleNext 和 renderNextButton() 是綁在一起的
     const handleNext = () => {
