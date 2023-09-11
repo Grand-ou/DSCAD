@@ -332,7 +332,7 @@ const styles = StyleSheet.create({
         // format
         flex: 1,
         // size
-        padding: '6%',
+        padding: '1%',
         // style
         backgroundColor: '#f4f4f4',
     },
@@ -340,16 +340,16 @@ const styles = StyleSheet.create({
         // format
         alignSelf: 'center',
         // size
-        paddingTop: 16,
-        paddingBottom: 30,
+        paddingTop: 0,
+        paddingBottom: 0,
         // style
         fontSize: '200%',
         fontWeight: 'bold'
     },
     subheading: {
         // size
-        paddingTop: 8,
-        paddingBottom: 8,
+        paddingTop: 0,
+        paddingBottom: 0,
         // style
         fontSize: '120%',
         fontWeight: 500
@@ -374,7 +374,7 @@ const styles = StyleSheet.create({
     button: {
         alignSelf: 'center',
         width: '64%',
-        padding: 10,
+        padding: 0,
         backgroundColor: "lightsalmon",
         borderRadius: 25
     },
@@ -395,7 +395,8 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-around',
-        paddingTop: 20
+        paddingTop: 10
+
     },
     tab_team: {
         display: 'flex',
